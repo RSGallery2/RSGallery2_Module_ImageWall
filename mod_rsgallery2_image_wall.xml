@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" method="upgrade">
+    <name>mod_rsgallery2_image_wall</name>
+    <author>RSGallery2 Team</author>
+	<creationDate>28 Aug 2015</creationDate>
+	<copyright>(C) 2015-2015 RSGallery2 Team. All rights reserved.</copyright>
+	<license>This component is released under the GNU/GPL License</license>
+    <authorEmail>team@rsgallery2.nl</authorEmail>
+    <authorUrl>www.rsgallery2.nl</authorUrl>
+    <version>4.0.0</version>
+    <description>MOD_RSGALLERY2_IMAGE_WALL_DESC</description>
+	
+	<files>
+		<filename module="mod_rsgallery2_image_wall">mod_rsgallery2_image_wall.php</filename>
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+	</files>
+		
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.mod_rsgallery2_image_wall.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_rsgallery2_image_wall.sys.ini</language>
+    </languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="spacer1" type="spacer" class="text" label="MOD_RSGALLERY2_IMAGE_WALL_NUMBER_OF_IMAGES" />
+
+				<field name="RowCount" type="text" default="3" label="MOD_RSGALLERY2_IMAGE_WALL_NUMBER_OF_ROWS" description="MOD_RSGALLERY2_IMAGE_WALL_NUMBER_OF_ROWS_DESC" />
+				<field name="ColumnCount" type="text" default="4" label="MOD_RSGALLERY2_IMAGE_WALL_NUMBER_OF_COLUMNS" description="MOD_RSGALLERY2_IMAGE_WALL_NUMBER_OF_COLUMNS_DESC" />
+				<field name="TargetWidth" type="text" default="800" label="MOD_RSGALLERY2_IMAGE_WALL_VIEW_WIDTH" description="MOD_RSGALLERY2_IMAGE_WALL_VIEW_WIDTH_DESC" />
+				<field name="TargetHeight" type="text" default="300" label="MOD_RSGALLERY2_IMAGE_WALL_VIEW_HEIGHT" description="MOD_RSGALLERY2_IMAGE_WALL_VIEW_HEIGHT_DESC" />
+				
+				<field name="filteringspacer2" type="spacer" hr="true" />
+
+				<!--field name="hasInnerBorder" type="radio" default="0" label="hasOuterBorder" description="hasOuterBorder_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="doMergeInnerBorder" type="radio" default="0" label="hasOuterBorder" description="hasOuterBorder_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field-->
+				<field name="InnerBorderType" type="list" default="2" label="InnerBorderType_TYPE" description="InnerBorderType_TYPE_DESC">
+					<option value="0">InnerBorderType None</option>
+					<option value="1">InnerBorderType Merge</option>
+					<option value="2">InnerBorderType Space</option>
+				</field>
+				<field name="InnerBorderSize" type="text" default="0" label="InnerBorderSize" description="InnerBorderSize_DESC">
+				</field>
+				
+				<!--field name="InnerBorderColorRGB" type="text" default="0" label="InnerBorderColorRGB" description="InnerBorderColorRGB_DESC">
+				</field-->
+				
+			
+				<field name="HasOuterBorder" type="radio" default="0" label="hasOuterBorder" description="hasOuterBorder_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="OuterBorderSize" type="text" default="0" label="OuterBorderSize" description="OuterBordersize_DESC">
+				</field>
+				
+				<!--field name="OuterBorderColorRGB" type="text" default="0" label="OuterBorderColorRGB" description="OuterBorderColorRGB_DESC">
+				</field-->
+				
+				<field name="filteringspacer3" type="spacer" hr="true" />
+
+				<!--field name="ImageSoure" type="list" default="2" label="ImageSoure_TYPE" description="ImageSoure_TYPE_DESC">
+					<option value="0">ImageSoure gallery</option>
+					<option value="1">ImageSoure lates images</option>
+					<option value="2">ImageSoure most voted</option>
+				</field-->
+				
+			</fieldset>
+		</fields>
+	
+	
+	
+	</config>
+</extension>
+
+	
+	
+	
