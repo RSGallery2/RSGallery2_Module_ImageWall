@@ -1,8 +1,8 @@
 <?php
 /**
-* Changelog for mod_rsgallery2_latest_galleries 
+* Changelog for mod_rsgallery2_image_wall
 * @version $Id$
-* @package mod_rsgallery2_latest_galleries
+* @package mod_rsgallery2_image_wall
 * @copyright (C) 2003 - 2015 RSGallery2 Team
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 **/
@@ -30,5 +30,5 @@ Legend:
 
 
 ---------------- 4.0.0 -- (not in the SVN) -- 2015-08-28 -------------
-Initial release mod_rsgallery2_latest_galleries v4.0.0 for Joomla 3.x
+Initial release mod_rsgallery2_image_wall v4.0.0 for Joomla 3.x
 

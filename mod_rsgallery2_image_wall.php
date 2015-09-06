@@ -39,7 +39,10 @@ $InnerBorderSize	= (int) $params->get('InnerBorderSize', 		'10');
 
 //--- Select images -----------------------------
 
+
+
 // ToDo: Export image selection to single file (s)
+
 
 //--- Query latest images -----------------------------------------------------
 
@@ -63,7 +66,7 @@ $query->order('date DESC');
 $database->setQuery($query, 0, $ImageCount);	//$ImageCount is the number of results to return
 
 $Images = $database->loadAssocList();
-if(!$Images){
+if(!$latestImages){
 	// Error handling
 	// ToDo: Ask module admin if a message is required (?debug) and to provide this error message
 	// enque message
