@@ -1,0 +1,38 @@
+<?php
+$dest = imagecreatefrompng('vinyl.png');
+$src = imagecreatefromjpeg('cover2.jpg');
+
+imagealphablending($dest, false);
+imagesavealpha($dest, true);
+
+imagecopymerge($dest, $src, 10, 9, 0, 0, 181, 180, 100); //have to play with these numbers for it to work for you, etc.
+
+header('Content-Type: image/png');
+imagepng($dest);
+
+imagedestroy($dest);
+imagedestroy($src);
+?>
+
+
+
+
+Question is about merging two images, however in this specified case you shouldn't do that. You should put Content Image (ie. cover) into <img /> tag, and Style Image into CSS, why?
+
+    As I said the cover belongs to the content of the document, while that vinyl record and shadow are just a part of the page styles.
+    Such separation is much more convenient to use. User can easily copy that image. It's easier to index by web-spiders.
+    Finally, it's much easier to maintain.
+
+So use a very simple code:
+
+<div class="cover">
+   <img src="/content/images/covers/movin-mountains.png" alt="Moving mountains by Pneuma" width="100" height="100" />
+</div>
+
+.cover {
+    padding: 10px;
+    padding-right: 100px;
+
+    background: url(/style/images/cover-background.png) no-repeat;
+}
+
