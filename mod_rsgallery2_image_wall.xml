@@ -73,6 +73,12 @@
 					<option value="2">ImageSoure most voted</option>
 				</field-->
 				
+				<!-- 
+					* do it only once 
+					* do it every ... time
+				-->
+				
+				
 			</fieldset>
 		</fields>
 	

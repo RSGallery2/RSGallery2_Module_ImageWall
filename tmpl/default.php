@@ -12,16 +12,19 @@ header('Content-Type: image/png');
 echo '<div class="mod_rsgallery2_image_wall">';
 
 $ItemIdx = 0;
-
+/*
 echo '$RowCount: '.$RowCount.'<br>';
 echo '$ColumnCount: '.$ColumnCount.'<br>';
-echo 'ImagesCount: '.count($Images).'<br>';
-
+echo '$ImagesCount: '.count($Images).'<br>';
+*/
 //--- Create target image as file ----------------------------------------
 
 $TargetImage = imagecreatetruecolor($TargetWidth, $TargetHeight);
 
+$TargetImageDebug = imagecreatetruecolor($TargetWidth, $TargetHeight);
+
 $TargetImageName = 'ImageWall.png';
+$TargetImageDebugName = 'ImageWallDebug.png';
 $RsgalleryImagePath = realpath(JPATH_ROOT.$rsgConfig->get('imgPath_original').'/../');
 $RsgalleryImageTempPath =  realpath(JPATH_ROOT.$rsgConfig->get('imgPath_original').'/../tmp');
 if (!file_exists($RsgalleryImageTempPath)) {
@@ -29,26 +32,52 @@ if (!file_exists($RsgalleryImageTempPath)) {
 }
 // Server file path
 $TargetImagePath = $RsgalleryImageTempPath .'/'. $TargetImageName;
+$TargetImageDebugPath = $RsgalleryImageTempPath .'/'. $TargetImageDebugName;
 
 // URL file path
 $TargetImageUrl= JRoute::_('images/rsgallery/tmp/'.$TargetImageName);
+$TargetImageDebugUrl= JRoute::_('images/rsgallery/tmp/'.$TargetImageDebugName);
 
+/*
 // to make background transparent
 imagealphablending($TargetImage, false);
 $transparency = imagecolorallocatealpha($TargetImage, 0, 0, 0, 127);
 imagefill($TargetImage, 0, 0, $transparency);
-/* if you want to set background color
+/**/
+/* if you want to set background color *
 $white = imagecolorallocate($TargetImage, 255, 255, 255);
-imagefill($TargetImage, 0, 0, $white);
-*/
+$black = imagecolorallocate($TargetImage, 0, 0, 0);
+//imagefill($TargetImage, 0, 0, $white);
+imagefill($TargetImage, 0, 0, $black);
+/**/
 imagesavealpha($TargetImage, true);
 
 // imagealphablending must be true in order to correcly stack 
 // the layers, but it must be false to save the image.
 imagealphablending($TargetImage, true);
 
-$InsertWidth = $TargetWidth / $ColumnCount; // + border ?
-$InsertHeight = $TargetHeight / $RowCount; // + border ?
+//--------------------------------------------------------------------------
+/**/
+// to make background transparent
+imagealphablending($TargetImageDebug, false);
+$transparency = imagecolorallocatealpha($TargetImageDebug, 0, 0, 0, 127);
+imagefill($TargetImageDebug, 0, 0, $transparency);
+/**/
+/* if you want to set background color *
+$white = imagecolorallocate($TargetImageDebug, 255, 255, 255);
+imagefill($TargetImageDebug, 0, 0, $white);
+/**/
+imagesavealpha($TargetImageDebug, true);
+
+// imagealphablending must be true in order to correcly stack 
+// the layers, but it must be false to save the image.
+imagealphablending($TargetImageDebug, true);
+
+
+//---  ----------------------------------------
+
+$InsertBaseWidth = $TargetWidth / $ColumnCount; // + border ?
+$InsertBaseHeight = $TargetHeight / $RowCount; // + border ?
 
 // "0" > InnerBorderType None
 // "1" > InnerBorderType Merge
@@ -57,14 +86,15 @@ $InsertHeight = $TargetHeight / $RowCount; // + border ?
 if ($InnerBorderType > 0)
 {
 	// Will make every image longer so it merges with the next
-	$InsertWidth = $InsertWidth + $InnerBorderSize;
+	$InsertWidth = $InsertBaseWidth + $InnerBorderSize;
+	$InsertHeight = $InsertBaseHeight + $InnerBorderSize; 
 }
-
+/*
 echo '$TargetWidth: '.$TargetWidth.'<br>';
 echo '$TargetHeight: '.$TargetHeight.'<br>';
 echo '$InsertWidth: '.$InsertWidth.'<br>';
 echo '$InsertHeight: '.$InsertHeight.'<br>';
-
+*/
 
 $ItemIdx=-1;
 for ($RowIdx = 0; $RowIdx < $RowCount; $RowIdx++) {
@@ -110,11 +140,16 @@ for ($RowIdx = 0; $RowIdx < $RowCount; $RowIdx++) {
 		}
 
 		list($SourceWidth, $SourceHeight) = getimagesize($SourceImagePath);
+		$SourceImage = imagecreatefromjpeg($SourceImagePath);
+
+		// image with new size
+		$ImgWithNewSize = ImageCreateTrueColor($InsertWidth, $InsertHeight);
+		imagecopyResampled ($ImgWithNewSize, $SourceImage, 0, 0, 0, 0, 
+			$InsertWidth, $InsertHeight, $SourceWidth, $SourceHeight);
 
 		//--- Merge image into target ---------------------------------
-		$InsertImage = imagecreatefromjpeg($SourceImagePath);
-		$InsertOffsetX = $ColIdx * $InsertWidth;
-		$InsertOffsetY = $RowIdx * $InsertHeight;
+		$InsertOffsetX = $ColIdx * $InsertBaseWidth;
+		$InsertOffsetY = $RowIdx * $InsertBaseHeight;
 /*
 		echo '$ColIdx: ' . $ColIdx . '<br>';
 		echo '$RowIdx: ' . $RowIdx . '<br>';
@@ -123,18 +158,26 @@ for ($RowIdx = 0; $RowIdx < $RowCount; $RowIdx++) {
 		echo '$InsertOffsetX: '.$InsertOffsetX.'<br>';
 		echo '$InsertOffsetY: '.$InsertOffsetY.'<br>';
 */
-//		imagecopymerge($TargetImage, $InsertImage, $InsertOffsetX, $InsertOffsetY, 0, 0,
-// 			$InsertWidth, $InsertHeight, 100);
-
-		imagecopyresized($TargetImage, $InsertImage, $InsertOffsetX, $InsertOffsetY, 0, 0,
-			$InsertWidth, $InsertHeight, $SourceWidth, $SourceHeight);
 
 //          return GD2::createSquareThumb( $source, $target, $rsgConfig->get('thumb_width') ); 
 //          return GD2::resizeImage($source, $target, $targetWidth); 
 //			img.utils.php
 
+		imagecopymerge($TargetImage, $ImgWithNewSize, $InsertOffsetX, $InsertOffsetY, 0, 0,
+ 			$InsertWidth, $InsertHeight, 99);
+
+		imagedestroy($ImgWithNewSize);
+		/* working but no merging ;_)
+                imagecopyresized($TargetImage, $InsertImage, $InsertOffsetX, $InsertOffsetY, 0, 0,
+                    $InsertWidth, $InsertHeight, $SourceWidth, $SourceHeight);
+        */
+
+		// Debug 
+		imagecopyresized($TargetImageDebug, $SourceImage, $InsertOffsetX, $InsertOffsetY, 0, 0,
+			$InsertWidth, $InsertHeight, $SourceWidth, $SourceHeight);
 	}
 }
+
 imagealphablending($TargetImage, false);
 imagesavealpha($TargetImage, true);
 
@@ -143,5 +186,27 @@ echo '<img src="'.$TargetImageUrl.'">';
 // imagedestroy($InsertImage);
 imagedestroy($TargetImage);
 
+
+// Debug
+imagealphablending($TargetImageDebug, false);
+imagesavealpha($TargetImageDebug, true);
+
+
+echo "<br>";
+echo "99"."<br>";
+echo "<br>";
+//echo "\$TargetImageDebug".$TargetImageDebug;
+//echo "\$TargetImageDebugUrl".$TargetImageDebugUrl;
+
+imagepng($TargetImageDebug, $TargetImageDebugPath);
+echo '<img src="'.$TargetImageDebugUrl.'">';
+// imagedestroy($InsertImage);
+imagedestroy($TargetImageDebug);
+
+
+
+
+
 echo '</div>';
+echo "<br>";
 
