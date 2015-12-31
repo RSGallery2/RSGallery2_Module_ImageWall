@@ -1,0 +1,155 @@
+$width = 210;
+$height = 190;
+
+$layers = array();
+$layers[] = imagecreatefrompng("img/01_boy_faceB.png");
+$layers[] = imagecreatefrompng("img/01_boy_hairB.png");
+
+$image = imagecreatetruecolor($width, $height);
+
+// to make background transparent
+imagealphablending($image, true);
+for ($i = 0; $i < count($layers); $i++) {
+  imagecopymerge($image, $layers[$i], 0, 0, 0, 0, $width, $height, 100);
+}
+imagealphablending($image, false);
+imagesavealpha($image, true);
+
+imagepng($image, 'final_img.png');
+
+
+
+
+-------------------------------------------------------------
+	
+
+I have a custom bicycle configurator that layers transparent png files with css. http://www.gallantbicycles.com/build/no1/
+
+I need to add the ability to combine them into one file dynamically so the user can download an image or share it.
+
+This is where I'm at right now, but it results in a black background and only the front most image is seen in the result:
+
+$width = 720;
+$height = 500;
+
+$layers = array();
+$layers[] = imagecreatefrompng("pathtomyimage/image.png");
+$layers[] = imagecreatefrompng("pathtomyimage/image.png");
+$layers[] = imagecreatefrompng("pathtomyimage/image.png");
+
+$image = imagecreatetruecolor($width, $height);
+imagealphablending($image, false);
+imagesavealpha($image, true);
+
+for ($i = 0; $i < count($layers); $i++) {
+  imagecopymerge($image, $layers[$i], 0, 0, 0, 0, $width, $height, 100);
+}
+
+header('Content-type: image/png');
+imagepng($image);
+
+php gd
+shareedit
+	
+asked Aug 16 '13 at 20:10
+Jason Wood
+1001311
+	
+1 	 
+	
+possible duplicate of Can PNG image transparency be preserved when using PHP's GDlib imagecopyresampled? – Orangepill Aug 16 '13 at 20:50
+   	 
+	
+I've already tried adding the lines "imagealphablending($image, false);" and "imagesavealpha($image, true);" so I think my problem is different. Additionally, I'm not resizing one image, but trying to layer multiple. – Jason Wood Aug 17 '13 at 16:33
+   	 
+	
+Use this proven functional procedure: stackoverflow.com/a/23078863/1277159 – Josh Guzman Apr 15 '14 at 12:50
+add a comment
+3 Answers
+active
+oldest
+votes
+up vote
+0
+down vote
+	
+
+Here is code which works:
+
+$width = 210;
+$height = 190;
+
+$layers = array();
+$layers[] = imagecreatefrompng("img/01_boy_faceB.png");
+$layers[] = imagecreatefrompng("img/01_boy_hairB.png");
+
+$image = imagecreatetruecolor($width, $height);
+
+// to make background transparent
+imagealphablending($image, false);
+$transparency = imagecolorallocatealpha($image, 0, 0, 0, 127);
+imagefill($image, 0, 0, $transparency);
+imagesavealpha($image, true);
+
+/* if you want to set background color
+$white = imagecolorallocate($image, 255, 255, 255);
+imagefill($image, 0, 0, $white);
+*/
+
+imagealphablending($image, true);
+for ($i = 0; $i < count($layers); $i++) {
+    imagecopy($image, $layers[$i], 0, 0, 0, 0, $width, $height);
+}
+imagealphablending($image, false);
+imagesavealpha($image, true);
+
+imagepng($image, 'final_img.png');
+
+?>
+
+shareedit
+	
+answered Apr 3 '14 at 17:49
+Atul Yadav
+997
+	
+add a comment
+up vote
+0
+down vote
+	
+
+You have to replace this code
+
+imagealphablending($image, false);
+imagesavealpha($image, true);
+
+for ($i = 0; $i < count($layers); $i++) {
+  imagecopymerge($image, $layers[$i], 0, 0, 0, 0, $width, $height, 100);
+}
+
+by
+
+imagealphablending($image, true);
+for ($i = 0; $i < count($layers); $i++) {
+  imagecopymerge($image, $layers[$i], 0, 0, 0, 0, $width, $height, 100);
+}
+imagealphablending($image, false);
+imagesavealpha($image, true);
+
+imagealphablending must be true in order to correcly stack the layers, but it must be false to save the image.
+shareedit
+	
+answered Aug 21 '13 at 11:39
+Lorenz Meyer
+7,712143061
+	
+add a comment
+up vote
+0
+down vote
+	
+
+Try this solution: Merge two images with transparencies in PHP
+
+use imagecopyresampled instead of imagecopymerge

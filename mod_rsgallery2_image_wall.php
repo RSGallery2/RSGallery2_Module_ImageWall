@@ -66,19 +66,14 @@ $query->order('date DESC');
 $database->setQuery($query, 0, $ImageCount);	//$ImageCount is the number of results to return
 
 $Images = $database->loadAssocList();
-if(!$latestImages){
+if(!$Images){
 	// Error handling
 	// ToDo: Ask module admin if a message is required (?debug) and to provide this error message
 	// enque message
 }
 
-
 //--- Output ------------------------------------------------------------------
 
 // Let's display what we've gathered: get the layout
 require JModuleHelper::getLayoutPath('mod_rsgallery2_image_wall', $params->get('layout', 'default'));
-
-
-
-
 

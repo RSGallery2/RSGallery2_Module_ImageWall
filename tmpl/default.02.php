@@ -50,16 +50,6 @@ imagealphablending($TargetImage, true);
 $InsertWidth = $TargetWidth / $ColumnCount; // + border ?
 $InsertHeight = $TargetHeight / $RowCount; // + border ?
 
-// "0" > InnerBorderType None
-// "1" > InnerBorderType Merge
-// "2" > InnerBorderType Space
-
-if ($InnerBorderType > 0)
-{
-	// Will make every image longer so it merges with the next
-	$InsertWidth = $InsertWidth + $InnerBorderSize;
-}
-
 echo '$TargetWidth: '.$TargetWidth.'<br>';
 echo '$TargetHeight: '.$TargetHeight.'<br>';
 echo '$InsertWidth: '.$InsertWidth.'<br>';
@@ -97,13 +87,13 @@ for ($RowIdx = 0; $RowIdx < $RowCount; $RowIdx++) {
 		$SourceImage = $Images[$ItemIdx];
 		$SourceImageName = $SourceImage['name'];
 		$SrcImageUrl = JRoute::_($SrcImageUrlPath.$SourceImageName);
-//		echo '<img src="'.$SrcImageUrl.'">';
+		echo '<img src="'.$SrcImageUrl.'">';
 
 		//         $url = 'images/rsgallery/original/'
 		//$SourceImagePath = 'images/rsgallery/original/' . $SourceImage['name'];
-		$FullPath_original = JPATH_ROOT.$rsgConfig->get('imgPath_original') . '/';
-		$SourceImagePath = $FullPath_original . $SourceImage['name'];
-//		echo '$SourceImagePath: ' . $SourceImagePath . '<br>';
+		$fullPath_original = JPATH_ROOT.$rsgConfig->get('imgPath_original') . '/';
+		$SourceImagePath = $fullPath_original . $SourceImage['name'];
+		echo '$SourceImagePath: ' . $SourceImagePath . '<br>';
 
 		if (!file_exists($SourceImagePath)) {
 			continue;
