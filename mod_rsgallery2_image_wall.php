@@ -3,7 +3,7 @@
 /**
 * RSGallery2 image wall module:
 * Module to show a collection of images from RSGallery2 side by side (www.rsgallery2.nl).
-* @copyright (C) 2015-2015 RSGallery2 Team
+* @copyright (C) 2016-2016 RSGallery2 Team
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 * @version 4.0.0
 **/

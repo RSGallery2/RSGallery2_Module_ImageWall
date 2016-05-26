@@ -2,8 +2,8 @@
 <extension type="module" version="3.0" method="upgrade">
     <name>mod_rsgallery2_image_wall</name>
     <author>RSGallery2 Team</author>
-	<creationDate>28 Aug 2015</creationDate>
-	<copyright>(C) 2015-2015 RSGallery2 Team. All rights reserved.</copyright>
+	<creationDate>28 Aug 2016</creationDate>
+	<copyright>(C) 2016-2016 RSGallery2 Team. All rights reserved.</copyright>
 	<license>This component is released under the GNU/GPL License</license>
     <authorEmail>team@rsgallery2.nl</authorEmail>
     <authorUrl>www.rsgallery2.nl</authorUrl>
