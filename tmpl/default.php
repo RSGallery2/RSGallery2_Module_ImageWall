@@ -1,6 +1,6 @@
 <?php
 /**
-* RSGallery2 latest galleries module: shows latest galleries from the Joomla extension RSGallery2 (www.rsgallery2.nl).
+* RSGallery2 latest galleries module: shows latest galleries from the Joomla extension RSGallery2 (www.rsgallery2.org).
 * @copyright (C) 2012 RSGallery2 Team
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 **/

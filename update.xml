@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+	<update>
+		<name>RSGallery2 module image wall update</name>
+		<description>Update matching component rsgallery2 v4.4.1</description>
+		<element>mod_rsgallery2_image_wall</element>
+		<type>module</type>
+		<version>4.0.1</version>
+		<downloads>
+			<downloadurl type="upgrade" format="zip">https://github.com/RSGallery2/RSGallery2_????/releases/download/Version_4_0_0/RSGallery2_????.4.0.0.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer>team@rsgallery2.org</maintainer>
+		<maintainerurl>rsgallery2.org</maintainerurl>
+		<targetplatform name="joomla" version="3.*"/>
+		<client>site</client>
+		<infourl>rsgallery2.org</infourl> 		
+	</update>
+</updates>

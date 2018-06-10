@@ -3,11 +3,11 @@
     <name>mod_rsgallery2_image_wall</name>
     <author>RSGallery2 Team</author>
 	<creationDate>28 Aug 2016</creationDate>
-	<copyright>(C) 2016-2016 RSGallery2 Team. All rights reserved.</copyright>
+	<copyright>(C) 2016-2018 RSGallery2 Team. All rights reserved.</copyright>
 	<license>This component is released under the GNU/GPL License</license>
-    <authorEmail>team@rsgallery2.nl</authorEmail>
-    <authorUrl>www.rsgallery2.nl</authorUrl>
-    <version>4.0.0</version>
+    <authorEmail>team@rsgallery2.org</authorEmail>
+    <authorUrl>www.rsgallery2.org</authorUrl>
+    <version>4.0.1</version>
     <description>MOD_RSGALLERY2_IMAGE_WALL_DESC</description>
 	
 	<files>

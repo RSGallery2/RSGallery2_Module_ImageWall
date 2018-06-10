@@ -3,7 +3,7 @@
 * Changelog for mod_rsgallery2_image_wall
 * @version $Id$
 * @package mod_rsgallery2_image_wall
-* @copyright (C) 2003 - 2015 RSGallery2 Team
+* @copyright (C) 2003 - 2018 RSGallery2 Team
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 **/
 
@@ -27,6 +27,11 @@ Legend:
 
 
 
+
+* --- 4.0.1 --- 2018-06-06 --- whazzup ------------------------------
+
+^ Pathes to files now written with slashes '../.../...' instead of '...' . DS . '...'
++ Added updateserver file
 
 
 ---------------- 4.0.0 -- (not in the SVN) -- 2015-08-28 -------------
